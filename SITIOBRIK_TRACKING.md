@@ -135,13 +135,42 @@ Esto reduce significativamente el bundle inicial y mejora LCP.
 
 ---
 
-## Fase 4 — Nuevas Secciones (⏳ Pendiente)
+## Fase 4 — Nuevas Secciones (✅ Completada)
 
-- [ ] Crear `VideoBackground.jsx` (componente reutilizable)
-- [ ] Sección `Servicios` (cards interactivas)
-- [ ] Sección `Proyectos Dúales` (música + código)
-- [ ] Sección `Portfolio Musical` (embeds Spotify/Apple)
-- [ ] Sección `Contacto` (formulario + WhatsApp)
+### Objetivo
+Agregar secciones que conecten los dos nichos (música + desarrollo) y expandan el sitio como portafolio.
+
+### Tareas ejecutadas
+
+| # | Tarea | Archivos | Estado |
+|---|-------|----------|--------|
+| 4.1 | Componente `VideoBackground` | `shared/VideoBackground.jsx` | ✅ |
+| 4.2 | Refactor Intro/Details/Trayectoria | `Intro.jsx`, `Details.jsx`, `Trayectoria.jsx` | ✅ |
+| 4.3 | Sección Servicios | `Services.jsx` | ✅ |
+| 4.4 | Sección Proyectos Duales | `DualProjects.jsx` | ✅ |
+| 4.5 | Sección Portfolio Musical | `MusicPortfolio.jsx` | ✅ |
+| 4.6 | Sección Contacto | `Contact.jsx` | ✅ |
+| 4.7 | Integrar en App.jsx + navegación | `App.jsx`, `navigation.js` | ✅ |
+
+### Nuevas secciones
+
+| Sección | ID | Descripción |
+|---------|----|-------------|
+| **Servicios** | `#servicios` | 4 cards: Producción, Desarrollo, Música+Código, Consultoría |
+| **Proyectos Duales** | `#proyectos-duales` | 4 proyectos que fusionan música y tecnología |
+| **Portfolio Musical** | `#musica` | Discografía con links a Spotify/Apple Music/YouTube |
+| **Contacto** | `#contacto` | WhatsApp + Email, incluye Footer |
+
+### Estructura final del sitio (9 secciones)
+
+```
+Intro → Highlights → Servicios → Details → Proyectos Duales → Trayectoria → Música → Gallery → Contacto
+```
+
+### Componente reutilizable: `VideoBackground`
+- Encapsula ReactPlayer + useInView + overlay
+- Reduce 9 líneas repetidas por componente a 1-3 líneas
+- Usado por Intro, Details y Trayectoria
 
 ---
 
