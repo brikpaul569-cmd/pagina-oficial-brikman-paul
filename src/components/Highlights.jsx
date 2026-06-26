@@ -1,7 +1,23 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaMusic, FaCode } from "react-icons/fa";
 
-export default function MyShowcase() {
+const musicItems = [
+  "Composición & Producción",
+  "Beatmaking",
+  "Grabación & Mastering",
+  "Distribución Digital",
+  "Sonido Experimental",
+];
+
+const techItems = [
+  "Frontend & Backend",
+  "APIs Musicales",
+  "UX/UI Interactivo",
+  "Integración Digital",
+  "Automatización & Data",
+];
+
+function Highlights() {
   const { scrollYProgress } = useScroll();
   const gradient = useTransform(scrollYProgress, [0, 1], ["#ec4899", "#8b5cf6"]);
   const titleOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
@@ -13,24 +29,19 @@ export default function MyShowcase() {
         backgroundImage: "url('/images/auriculares.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "scroll",
       }}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-20 text-white"
     >
-      {/* Capa gradiente principal */}
       <motion.div
         style={{ background: gradient }}
         className="absolute inset-0 z-0 opacity-30 bg-black"
-      ></motion.div>
+      />
 
-      {/* Desvanecido arriba */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10"></div>
-      {/* Desvanecido abajo */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10" />
 
-      {/* Contenido */}
       <div className="relative z-20 max-w-5xl w-full mx-auto flex flex-col md:flex-row gap-12">
-        {/* Bloque Música */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,29 +58,22 @@ export default function MyShowcase() {
           </motion.h2>
 
           <ul className="space-y-4">
-            {[
-              "Composición & Producción",
-              "Beatmaking",
-              "Grabación & Mastering",
-              "Distribución Digital",
-              "Sonido Experimental",
-            ].map((item, idx) => (
+            {musicItems.map((item, idx) => (
               <motion.li
-                key={idx}
+                key={item}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
                 className="flex items-center gap-3 text-lg md:text-xl"
               >
-                <span className="w-3 h-3 rounded-full shrink-0 bg-gradient-to-r from-blue-400 to-green-400"></span>
+                <span className="w-3 h-3 rounded-full shrink-0 bg-gradient-to-r from-blue-400 to-green-400" />
                 <span className="drop-shadow">{item}</span>
               </motion.li>
             ))}
           </ul>
         </motion.div>
 
-        {/* Bloque Tech */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -86,22 +90,16 @@ export default function MyShowcase() {
           </motion.h2>
 
           <ul className="space-y-4">
-            {[
-              "Frontend & Backend",
-              "APIs Musicales",
-              "UX/UI Interactivo",
-              "Integración Digital",
-              "Automatización & Data",
-            ].map((item, idx) => (
+            {techItems.map((item, idx) => (
               <motion.li
-                key={idx}
+                key={item}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
                 className="flex items-center gap-3 text-lg md:text-xl"
               >
-                <span className="w-3 h-3 rounded-full shrink-0 bg-gradient-to-r from-blue-400 to-green-400"></span>
+                <span className="w-3 h-3 rounded-full shrink-0 bg-gradient-to-r from-blue-400 to-green-400" />
                 <span className="drop-shadow">{item}</span>
               </motion.li>
             ))}
@@ -111,3 +109,5 @@ export default function MyShowcase() {
     </motion.section>
   );
 }
+
+export default Highlights;

@@ -1,38 +1,40 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import ReactPlayer from "react-player";
 
-export default function Speciality() {
+function Details() {
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { margin: "-200px" });
+
   return (
     <section
-      id="speciality"
+      id="details"
+      ref={sectionRef}
       className="relative min-h-screen flex items-center overflow-hidden px-6 py-20 text-white"
     >
-      {/* 🎥 Video de fondo */}
-      <ReactPlayer
-        url="https://youtu.be/RXnVWnfvEcA?si=0DViB_u4JVK9TIl6"
-        playing
-        loop
-        muted
-        width="100%"
-        height="100%"
-        className="absolute top-0 left-0 z-0 pointer-events-none"
-      />
+      {inView && (
+        <ReactPlayer
+          url="https://youtu.be/RXnVWnfvEcA"
+          playing
+          loop
+          muted
+          width="100%"
+          height="100%"
+          className="absolute top-0 left-0 z-0 pointer-events-none"
+        />
+      )}
 
-      {/* Capa oscura cristal */}
-      <div className="absolute inset-0 z-0 bg-black/50 backdrop-blur-md"></div>
+      <div className="absolute inset-0 z-0 bg-black/50 backdrop-blur-md" />
 
-      {/* Contenido */}
       <div className="relative z-10 container mx-auto px-4 flex flex-col md:flex-row md:items-center md:gap-16">
-        {/* Imagen personaje */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">
           <img
             src="images/10691784.png"
-            alt="Intro Personaje"
-            className="w-full md:w-[600px] max-w-none mix-blend-lighten opacity-95 backdrop-blur-sm transition duration-500"
+            alt="Brikman Paul — representación visual del manifiesto artístico"
+            className="w-full md:w-[600px] max-w-none mix-blend-lighten opacity-95 backdrop-blur-sm"
           />
         </div>
 
-        {/* Texto manifiesto */}
         <div className="w-full md:w-1/2 flex flex-col">
           <motion.h1
             initial={{ opacity: 0, y: -50 }}
@@ -74,3 +76,5 @@ export default function Speciality() {
     </section>
   );
 }
+
+export default Details;

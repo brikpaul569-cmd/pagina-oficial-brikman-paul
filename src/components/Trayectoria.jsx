@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   FaLaptopCode,
   FaHeadphonesAlt,
@@ -7,66 +7,78 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactPlayer from "react-player";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
-const timelineData = [
+const timeline = [
   {
     year: 2010,
     label: "Inicio Profesional",
     icon: <FaChalkboardTeacher size={32} />,
+    description:
+      "Inicio en la producción musical, explorando Sistemas como Steinberg Cubase y Reason",
   },
   {
     year: 2014,
     label: "Primeros Proyectos",
     icon: <FaLaptopCode size={32} />,
+    description:
+      "Desarrollo de los primeros proyectos de software y producción de beats profesionales.",
   },
   {
     year: 2018,
     label: "Desarrollo y Producción",
     icon: <FaHeadphonesAlt size={32} />,
+    description:
+      "Consolidación como desarrollador Full-Stack y Productor.",
   },
   {
     year: 2022,
     label: "Especialización",
     icon: <FaChalkboardTeacher size={32} />,
+    description: "Discografía General.",
   },
   {
     year: 2025,
     label: "Ingeniero y Productor",
     icon: <FaMicrochip size={32} />,
+    description:
+      "Profesional completo en ingeniería de sistemas y producción musical, creando proyectos integrales innovadores.",
   },
 ];
 
-const descriptions = [
-  "Inicio en la producción musical, explorando Sistemas como Steinberg Cubase y Reason",
-  "Desarrollo de los primeros proyectos de software y producción de beats profesionales.",
-  "Consolidación como desarrollador Full-Stack y Productor.",
-  "Discografía General.",
-  "Profesional completo en ingeniería de sistemas y producción musical, creando proyectos integrales innovadores.",
-];
-
-export default function Timeline() {
+function Trayectoria() {
   const [active, setActive] = useState(null);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { margin: "-200px" });
+
+  const toggle = useCallback(
+    (idx) => setActive((prev) => (prev === idx ? null : idx)),
+    []
+  );
 
   return (
-    <section className="relative w-full min-h-screen px-6 pt-10 md:pt-16 lg:pt-20 pb-10 text-white overflow-hidden flex flex-col justify-start">
-      {/* 🎥 Video de fondo */}
+    <section
+      id="trayectoria"
+      ref={sectionRef}
+      className="relative w-full min-h-screen px-6 pt-10 md:pt-16 lg:pt-20 pb-10 text-white overflow-hidden flex flex-col justify-start"
+    >
       <div className="absolute inset-0 z-0">
-        <ReactPlayer
-          url="https://www.youtube.com/watch?v=2Nwb1O0IeDo"
-          loop
-          muted
-          playing
-          width="100%"
-          height="100%"
-          style={{ position: "absolute", top: 0, left: 0 }}
-        />
-        {/* Gradiente PC */}
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-purple-900 via-black/80 to-yellow-500 opacity-90"></div>
-        {/* Gradiente móvil/tablet */}
-        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-yellow-400/50 via-black/70 to-purple-700/90"></div>
+        {inView && (
+          <ReactPlayer
+            url="https://www.youtube.com/watch?v=2Nwb1O0IeDo"
+            loop
+            muted
+            playing
+            width="100%"
+            height="100%"
+            style={{ position: "absolute", top: 0, left: 0 }}
+          />
+        )}
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-purple-900 via-black/80 to-yellow-500 opacity-90" />
+        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-yellow-400/50 via-black/70 to-purple-700/90" />
       </div>
 
-      {/* Contenido */}
       <div className="relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -40 }}
@@ -78,28 +90,17 @@ export default function Timeline() {
           Trayectoria
         </motion.h2>
 
-        {/* Línea de tiempo scroll horizontal */}
         <div className="relative overflow-x-auto">
-          <div
-            className="
-              flex items-center justify-center
-              flex-nowrap gap-6 sm:gap-12 lg:gap-20
-              mx-auto px-4
-              w-full max-w-7xl
-            "
-          >
-            {timelineData.map((item, idx) => (
+          <div className="flex items-center justify-center flex-nowrap gap-6 sm:gap-12 lg:gap-20 mx-auto px-4 w-full max-w-7xl">
+            {timeline.map((item, idx) => (
               <div
                 key={item.year}
-                className="
-                  flex flex-col items-center flex-shrink-0 cursor-pointer
-                  focus:outline-none
-                "
-                onClick={() => setActive(idx === active ? null : idx)}
+                className="flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none"
+                onClick={() => toggle(idx)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                    setActive(idx === active ? null : idx);
+                    toggle(idx);
                   }
                 }}
                 tabIndex={0}
@@ -115,7 +116,11 @@ export default function Timeline() {
                         ? "0 0 15px rgba(203, 213, 255, 0.8)"
                         : "none",
                   }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                  }}
                   className="rounded-full p-4 bg-purple-700/20 hover:bg-purple-500/40"
                   title={item.label}
                 >
@@ -143,7 +148,6 @@ export default function Timeline() {
           </div>
         </div>
 
-        {/* Descripción */}
         <AnimatePresence>
           {active !== null && (
             <motion.div
@@ -158,7 +162,7 @@ export default function Timeline() {
                 color: "rgba(255,255,255,0.95)",
               }}
             >
-              <p className="text-lg m-0">{descriptions[active]}</p>
+              <p className="text-lg m-0">{timeline[active].description}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -166,3 +170,5 @@ export default function Timeline() {
     </section>
   );
 }
+
+export default Trayectoria;
