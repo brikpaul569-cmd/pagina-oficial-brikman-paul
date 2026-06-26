@@ -1,16 +1,21 @@
+import { lazy, Suspense, useCallback } from 'react';
 import Header from './components/Header';
 import Intro from './components/Intro';
-import Highlights from './components/Highlights';
-import Services from './components/Services';
-import Details from './components/Details';
-import DualProjects from './components/DualProjects';
-import Trayectoria from './components/Trayectoria';
-import MusicPortfolio from './components/MusicPortfolio';
-import Gallery from './components/Gallery';
-import Contact from './components/Contact';
 import SEOHead from './components/layout/SEOHead';
 import { useScrollSection } from './hooks/useScrollSection';
-import { useCallback } from 'react';
+
+const Highlights = lazy(() => import('./components/Highlights'));
+const Services = lazy(() => import('./components/Services'));
+const Details = lazy(() => import('./components/Details'));
+const DualProjects = lazy(() => import('./components/DualProjects'));
+const Trayectoria = lazy(() => import('./components/Trayectoria'));
+const MusicPortfolio = lazy(() => import('./components/MusicPortfolio'));
+const Gallery = lazy(() => import('./components/Gallery'));
+const Contact = lazy(() => import('./components/Contact'));
+
+function SectionFallback() {
+  return <div className="min-h-screen" />;
+}
 
 const sections = [
   {
@@ -74,14 +79,14 @@ function App() {
       <SEOHead title={seo?.title} description={seo?.description} />
       <Header />
       <section id="intro"><Intro /></section>
-      <section id="highlights"><Highlights /></section>
-      <section id="servicios"><Services /></section>
-      <section id="details"><Details /></section>
-      <section id="proyectos-duales"><DualProjects /></section>
-      <section id="trayectoria"><Trayectoria /></section>
-      <section id="musica"><MusicPortfolio /></section>
-      <section id="gallery"><Gallery /></section>
-      <section id="contacto"><Contact /></section>
+      <section id="highlights"><Suspense fallback={<SectionFallback />}><Highlights /></Suspense></section>
+      <section id="servicios"><Suspense fallback={<SectionFallback />}><Services /></Suspense></section>
+      <section id="details"><Suspense fallback={<SectionFallback />}><Details /></Suspense></section>
+      <section id="proyectos-duales"><Suspense fallback={<SectionFallback />}><DualProjects /></Suspense></section>
+      <section id="trayectoria"><Suspense fallback={<SectionFallback />}><Trayectoria /></Suspense></section>
+      <section id="musica"><Suspense fallback={<SectionFallback />}><MusicPortfolio /></Suspense></section>
+      <section id="gallery"><Suspense fallback={<SectionFallback />}><Gallery /></Suspense></section>
+      <section id="contacto"><Suspense fallback={<SectionFallback />}><Contact /></Suspense></section>
     </div>
   );
 }

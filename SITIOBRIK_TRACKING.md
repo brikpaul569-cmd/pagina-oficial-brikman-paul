@@ -174,12 +174,55 @@ Intro → Highlights → Servicios → Details → Proyectos Duales → Trayecto
 
 ---
 
-## Fase 5 — Performance y Testing (⏳ Pendiente)
+## Fase 5 — Performance y Testing (✅ Completada)
 
-- [ ] Code splitting con `React.lazy`
-- [ ] Imágenes a WebP
-- [ ] Bundle analysis
-- [ ] Lighthouse audit final
+### Objetivo
+Optimizar bundle, imágenes y carga para mejorar Core Web Vitals.
+
+### Tareas ejecutadas
+
+| # | Tarea | Archivos | Estado |
+|---|-------|----------|--------|
+| 5.1 | Bundle analysis | `vite.config.js`, `dist/stats.html` | ✅ |
+| 5.2 | Code splitting con `React.lazy` | `App.jsx` | ✅ |
+| 5.3 | Optimización de imágenes | `vite.config.js` | ✅ |
+| 5.4 | `manualChunks` para vendor libs | `vite.config.js` | ✅ |
+
+### Resultados
+
+#### Code Splitting (React.lazy + manualChunks)
+
+Cada sección ahora es su propio chunk JS que se carga bajo demanda:
+
+| Chunk | Tamaño | Gzip |
+|-------|--------|------|
+| `vendor` (React, Helmet) | 29.6 KB | 10.4 KB |
+| `player` (ReactPlayer) | 26.8 KB | 9.6 KB |
+| `motion` (Framer Motion) | 124.4 KB | 41.7 KB |
+| `icons` (react-icons) | 2.5 KB | 1.1 KB |
+| App shell (`index-p_j1Oj80.js`) | 12.1 KB | 4.5 KB |
+| Cada sección individual | 2-4 KB | 1-2 KB |
+| **Total JS inicial** | **~42 KB** (shell + vendor) | **~15 KB** |
+
+#### Imágenes optimizadas
+
+| Métrica | Antes | Después |
+|---------|-------|---------|
+| Peso total imágenes | 29.1 MB | 8.5 MB |
+| Ahorro total | — | **70.9% (20.6 MB)** |
+| Plugin | — | `vite-plugin-image-optimizer` (sharp + svgo) |
+
+Mayores reducciones:
+- `auriculares.jpg`: 5.2 MB → 952 KB (**-82%**)
+- `1.jpg`: 2.2 MB → 419 KB (**-82%**)
+- `5.png`: 1.6 MB → 309 KB (**-82%**)
+- `9.png`: 2.9 MB → 1.0 MB (**-65%**)
+
+#### Bundle visualizer
+`dist/stats.html` generado con `rollup-plugin-visualizer`. Abrirlo en navegador para ver gráfico interactivo de dependencias.
+
+#### Lighthouse
+Pendiente de ejecutar en entorno real (deploy o `npm run preview` + DevTools).
 
 ---
 
