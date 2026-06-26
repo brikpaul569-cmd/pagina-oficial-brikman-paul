@@ -6,9 +6,7 @@ import {
   FaMicrochip,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactPlayer from "react-player";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import VideoBackground from "./shared/VideoBackground";
 
 const timeline = [
   {
@@ -29,8 +27,7 @@ const timeline = [
     year: 2018,
     label: "Desarrollo y Producción",
     icon: <FaHeadphonesAlt size={32} />,
-    description:
-      "Consolidación como desarrollador Full-Stack y Productor.",
+    description: "Consolidación como desarrollador Full-Stack y Productor.",
   },
   {
     year: 2022,
@@ -49,8 +46,6 @@ const timeline = [
 
 function Trayectoria() {
   const [active, setActive] = useState(null);
-  const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { margin: "-200px" });
 
   const toggle = useCallback(
     (idx) => setActive((prev) => (prev === idx ? null : idx)),
@@ -60,24 +55,17 @@ function Trayectoria() {
   return (
     <section
       id="trayectoria"
-      ref={sectionRef}
       className="relative w-full min-h-screen px-6 pt-10 md:pt-16 lg:pt-20 pb-10 text-white overflow-hidden flex flex-col justify-start"
     >
-      <div className="absolute inset-0 z-0">
-        {inView && (
-          <ReactPlayer
-            url="https://www.youtube.com/watch?v=2Nwb1O0IeDo"
-            loop
-            muted
-            playing
-            width="100%"
-            height="100%"
-            style={{ position: "absolute", top: 0, left: 0 }}
-          />
-        )}
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-purple-900 via-black/80 to-yellow-500 opacity-90" />
-        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-yellow-400/50 via-black/70 to-purple-700/90" />
-      </div>
+      <VideoBackground
+        url="https://www.youtube.com/watch?v=2Nwb1O0IeDo"
+        overlay={
+          <>
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-purple-900 via-black/80 to-yellow-500 opacity-90" />
+            <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-yellow-400/50 via-black/70 to-purple-700/90" />
+          </>
+        }
+      />
 
       <div className="relative z-10">
         <motion.h2

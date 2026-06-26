@@ -1,30 +1,16 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import ReactPlayer from "react-player";
+import { motion } from "framer-motion";
+import VideoBackground from "./shared/VideoBackground";
 
 function Details() {
-  const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { margin: "-200px" });
-
   return (
     <section
       id="details"
-      ref={sectionRef}
       className="relative min-h-screen flex items-center overflow-hidden px-6 py-20 text-white"
     >
-      {inView && (
-        <ReactPlayer
-          url="https://youtu.be/RXnVWnfvEcA"
-          playing
-          loop
-          muted
-          width="100%"
-          height="100%"
-          className="absolute top-0 left-0 z-0 pointer-events-none"
-        />
-      )}
-
-      <div className="absolute inset-0 z-0 bg-black/50 backdrop-blur-md" />
+      <VideoBackground
+        url="https://youtu.be/RXnVWnfvEcA"
+        overlay={<div className="absolute inset-0 bg-black/50 backdrop-blur-md" />}
+      />
 
       <div className="relative z-10 container mx-auto px-4 flex flex-col md:flex-row md:items-center md:gap-16">
         <div className="w-full md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">

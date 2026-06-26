@@ -1,32 +1,17 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import ReactPlayer from "react-player";
+import { motion } from "framer-motion";
+import VideoBackground from "./shared/VideoBackground";
 
 function Intro() {
-  const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { margin: "-200px" });
-
   return (
     <motion.section
       id="intro"
-      ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-b from-[#5B00A7] to-[#9F5CFF] text-white flex items-center overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, ease: "easeOut" }}
       viewport={{ once: false, amount: 0.5 }}
     >
-      {inView && (
-        <ReactPlayer
-          url="https://www.youtube.com/watch?v=JGBlMMR8YzM"
-          playing
-          loop
-          muted
-          width="100%"
-          height="100%"
-          className="absolute top-0 left-0 z-0 pointer-events-none"
-        />
-      )}
+      <VideoBackground url="https://www.youtube.com/watch?v=JGBlMMR8YzM" />
 
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center relative z-10">
         <div className="flex justify-center md:justify-end -mt-20 md:-mt-24 px-4">
