@@ -52,12 +52,40 @@ Eliminar código muerto, centralizar configuración, preparar base SEO.
 
 ---
 
-## Fase 2 — SEO y Head (⏳ Pendiente)
+## Fase 2 — SEO y Head (✅ Completada)
 
-- [ ] Envolver App con `HelmetProvider`
-- [ ] Crear componente `SEOHead.jsx`
-- [ ] Añadir meta tags dinámicos por sección
-- [ ] Evaluar con Lighthouse
+### Objetivo
+Meta tags dinámicos por sección para mejorar posicionamiento y compartición en redes.
+
+### Tareas ejecutadas
+
+| # | Tarea | Archivos | Estado |
+|---|-------|----------|--------|
+| 2.1 | Envolver App con `HelmetProvider` | `main.jsx` | ✅ (Fase 1) |
+| 2.2 | Crear componente `SEOHead.jsx` | `src/components/layout/SEOHead.jsx` | ✅ |
+| 2.3 | Integrar SEO dinámico por sección | `App.jsx` | ✅ |
+| 2.4 | Evaluar con Lighthouse | — | ⏳ Pendiente (manual) |
+
+### Detalle técnico
+
+#### `SEOHead.jsx` — Props aceptadas:
+- `title`, `description`, `ogTitle`, `ogDescription`, `ogImage`, `ogUrl`, `keywords`
+- Valores por defecto desde `SITE_CONFIG`
+- Usa `<Helmet>` de `react-helmet-async` para inyectar en `<head>`
+
+#### Cada sección tiene SEO único:
+
+| Sección | Title |
+|---------|-------|
+| Intro | Productor Musical & Desarrollador de Software |
+| Highlights | Proyectos — Música y Código |
+| Details | Mi Especialidad — Fusión de Arte y Tecnología |
+| Trayectoria | Trayectoria — 15 Años de Música y Código |
+| Gallery | Galería — Visuales y Arte Digital |
+| Footer | Contacto — Conectemos |
+
+#### Verificación Lighthouse pendiente:
+- Necesita deploy o `npm run preview` + Chrome DevTools
 
 ---
 
