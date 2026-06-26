@@ -4,6 +4,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 export default defineConfig({
+  base: '/pagina-oficial-brikman-paul/',
   plugins: [
     react(),
     ViteImageOptimizer({
