@@ -89,14 +89,49 @@ Meta tags dinámicos por sección para mejorar posicionamiento y compartición e
 
 ---
 
-## Fase 3 — Refactor Componentes (⏳ Pendiente)
+## Fase 3 — Refactor Componentes (✅ Completada)
 
-- [ ] Refactor App.jsx (IntersectionObserver, imports limpios)
-- [ ] Refactor Intro (lazy video, imagen optimizada)
-- [ ] Refactor Highlights (corregir export, mobile bg)
-- [ ] Refactor Details (unificar id)
-- [ ] Refactor Gallery (eliminar `<style jsx>`, lazy loading)
-- [ ] Refactor Timeline (datos unificados)
+### Objetivo
+Refactorizar todos los componentes para mejorar rendimiento, consistencia y mantenibilidad.
+
+### Tareas ejecutadas
+
+| # | Tarea | Archivos | Estado |
+|---|-------|----------|--------|
+| 3.1 | Refactor App.jsx | `App.jsx`, `useScrollSection.js` | ✅ |
+| 3.2 | Refactor Intro | `Intro.jsx` | ✅ |
+| 3.3 | Refactor Highlights | `Highlights.jsx` | ✅ |
+| 3.4 | Refactor Details | `Details.jsx` | ✅ |
+| 3.5 | Refactor Gallery | `Gallery.jsx`, `index.css` | ✅ |
+| 3.6 | Refactor Timeline | `Trayectoria.jsx` | ✅ |
+
+### Detalle técnico
+
+#### `useScrollSection.js` — Hook personalizado
+- Reemplaza el `useEffect` + `window.addEventListener('scroll')` directo
+- Usa `IntersectionObserver` con `threshold: 0.3` para detectar sección activa
+- Maneja update de color de fondo y hash de URL
+- Limpia observers al desmontar
+
+#### Lazy loading de videos
+Los 3 videos de YouTube (`ReactPlayer`) ahora solo se montan cuando la sección está cerca del viewport:
+- Intro: `useInView(ref, { margin: "-200px" })`
+- Details: `useInView(ref, { margin: "-200px" })`
+- Trayectoria: `useInView(ref, { margin: "-200px" })`
+
+Esto reduce significativamente el bundle inicial y mejora LCP.
+
+#### Inconsistencias corregidas
+
+| Problema | Antes | Después |
+|----------|-------|---------|
+| Details id | `#speciality` | `#details` |
+| Export name Highlights | `MyShowcase` | `Highlights` |
+| Export name Details | `Speciality` | `Details` |
+| Export name Timeline | `Timeline` | `Trayectoria` |
+| Timeline data | 2 arrays separados | 1 array unificado |
+| Gallery `<style jsx>` | No funcional en React | Clase `scrollbar-hide` via Tailwind |
+| `backgroundAttachment: fixed` | No soportado en iOS | Cambiado a `scroll` |
 
 ---
 
