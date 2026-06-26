@@ -9,11 +9,11 @@
 | Fase | Estado | Inicio | Fin |
 |------|--------|--------|-----|
 | **Fase 1** — Limpieza y Config | ✅ Completada | 26/06/2026 | 26/06/2026 |
-| **Fase 2** — SEO y Head | ⏳ Pendiente | — | — |
-| **Fase 3** — Refactor Componentes | ⏳ Pendiente | — | — |
-| **Fase 4** — Nuevas Secciones | ⏳ Pendiente | — | — |
-| **Fase 5** — Performance y Testing | ⏳ Pendiente | — | — |
-| **Migración GitHub Actions** | ⏳ Pendiente | — | — |
+| **Fase 2** — SEO y Head | ✅ Completada | 26/06/2026 | 26/06/2026 |
+| **Fase 3** — Refactor Componentes | ✅ Completada | 26/06/2026 | 26/06/2026 |
+| **Fase 4** — Nuevas Secciones | ✅ Completada | 26/06/2026 | 26/06/2026 |
+| **Fase 5** — Performance y Testing | ✅ Completada | 26/06/2026 | 26/06/2026 |
+| **Deploy GitHub Pages** | ✅ Completado | 26/06/2026 | 26/06/2026 |
 
 ---
 
@@ -241,6 +241,34 @@ Pendiente de ejecutar en entorno real (deploy o `npm run preview` + DevTools).
 | ADR-001 | Config centralizada en `src/config/` | URLs y textos estaban hardcodeados | Un solo punto de cambio para redes, navegación y datos del sitio |
 | ADR-002 | `react-helmet-async` para SEO dinámico | Necesidad de meta tags distintos por sección | Permite SEO granular sin perder SPA |
 | ADR-003 | LinkedIn actualizado a nueva URL | El perfil cambió | Se actualiza en `social.js` y en JSON-LD de `index.html` |
+
+---
+
+## Deploy — GitHub Pages (✅ Completado)
+
+### Configuración
+- **Plataforma:** GitHub Pages vía GitHub Actions
+- **URL:** `https://brikpaul569-cmd.github.io/pagina-oficial-brikman-paul/`
+- **Trigger:** Push a `main`
+- **Base path:** `/pagina-oficial-brikman-paul/` (configurado en `vite.config.js`)
+
+### Workflow archivo
+`.github/workflows/deploy.yml` — build + deploy en un solo workflow:
+
+| Paso | Acción |
+|------|--------|
+| 1 | Checkout repo |
+| 2 | Setup Node 24 con cache npm |
+| 3 | `npm ci` |
+| 4 | `npm run build` |
+| 5 | `actions/configure-pages` |
+| 6 | `actions/upload-pages-artifact` (sube `dist/`) |
+| 7 | `actions/deploy-pages` (deploy a Pages) |
+
+### Estado
+- ✅ Merge `develop` → `main` completado (fast-forward, commit `615202b`)
+- ✅ Push a `main` — workflow disparado automáticamente
+- ⏳ Verificar en Actions: https://github.com/brikpaul569-cmd/pagina-oficial-brikman-paul/actions
 
 ---
 
