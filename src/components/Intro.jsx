@@ -27,7 +27,7 @@ function Intro() {
         {/* Imagen animada */}
      <div className="flex justify-center md:justify-end -mt-20 md:-mt-24 px-4">
     <motion.img
-    src="/images/personaje_intro.png.png"
+    src="/images/personaje_intro.png"
     alt="Ilustración del personaje representando a Brikman"
     className="w-1/3 md:w-1/3 max-w-md mix-blend-lighten opacity-90 rounded-full shadow-2xl backdrop-blur-sm object-cover object-center transition duration-100"
     initial={{ opacity: 0, y: -50 }}

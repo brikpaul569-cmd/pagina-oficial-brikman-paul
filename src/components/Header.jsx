@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import "@fontsource/inter";
-
-const navLinks = [
-  { href: "#intro", label: "Inicio" },
-  { href: "#highlights", label: "Proyectos" },
-  { href: "#details", label: "Mi proceso" },
-  { href: "#trayectoria", label: "Trayectoria" },
-  { href: "#gallery", label: "Galería" },
-  { href: "#footer", label: "Contacto" },
-];
+import { NAV_LINKS } from "../config/navigation";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +43,7 @@ function Header() {
         transition: { duration: 0.4, ease: "easeInOut" },
       });
     }
-  }, [scrolled]);
+  }, [scrolled, controls, contentControls]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -111,7 +103,7 @@ function Header() {
 
         {/* Menú normal en desktop */}
         <div className="hidden md:flex space-x-6 ml-8">
-          {navLinks.map(({ href, label }) => (
+          {NAV_LINKS.map(({ href, label }) => (
             <motion.a
               key={href}
               href={href}
@@ -134,7 +126,7 @@ function Header() {
           className="md:hidden px-4 pb-4"
         >
           <ul className="flex flex-col space-y-4">
-            {navLinks.map(({ href, label }) => (
+            {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
