@@ -16,7 +16,7 @@ function Intro() {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center relative z-10">
         <div className="flex justify-center md:justify-end -mt-20 md:-mt-24 px-4">
           <motion.img
-            src="/images/personaje_intro.png"
+            src={`${import.meta.env.BASE_URL}images/personaje_intro.png`}
             alt="Brikman Paul — ilustración del personaje representando al artista"
             className="w-1/3 md:w-1/3 max-w-md mix-blend-lighten opacity-90 rounded-full shadow-2xl backdrop-blur-sm object-cover object-center"
             initial={{ opacity: 0, y: -50 }}

@@ -1,17 +1,18 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
+const BASE = import.meta.env.BASE_URL;
 const images = [
-  "/images/1.jpg",
-  "/images/2.png",
-  "/images/3.png",
-  "/images/4.png",
-  "/images/5.png",
-  "/images/6.png",
-  "/images/7.png",
-  "/images/8.png",
-  "/images/9.png",
-  "/images/10.png",
+  `${BASE}images/1.jpg`,
+  `${BASE}images/2.png`,
+  `${BASE}images/3.png`,
+  `${BASE}images/4.png`,
+  `${BASE}images/5.png`,
+  `${BASE}images/6.png`,
+  `${BASE}images/7.png`,
+  `${BASE}images/8.png`,
+  `${BASE}images/9.png`,
+  `${BASE}images/10.png`,
 ];
 
 function AnimatedImage({ src, alt, onClick, index }) {

@@ -7,7 +7,7 @@ const releases = [
     title: "Mente & Alma",
     type: "Álbum",
     year: 2024,
-    image: "/images/1.jpg",
+    image: `${import.meta.env.BASE_URL}images/1.jpg`,
     links: {
       spotify: SOCIAL_LINKS.spotify.url,
       apple: SOCIAL_LINKS.appleMusic.url,
@@ -18,7 +18,7 @@ const releases = [
     title: "Spiritual Sounds",
     type: "EP",
     year: 2023,
-    image: "/images/2.png",
+    image: `${import.meta.env.BASE_URL}images/2.png`,
     links: {
       spotify: SOCIAL_LINKS.spotify.url,
       apple: SOCIAL_LINKS.appleMusic.url,

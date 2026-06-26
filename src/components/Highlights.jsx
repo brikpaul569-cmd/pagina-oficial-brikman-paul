@@ -26,7 +26,7 @@ function Highlights() {
   return (
     <motion.section
       style={{
-        backgroundImage: "url('/images/auriculares.jpg')",
+        backgroundImage: `url('${import.meta.env.BASE_URL}images/auriculares.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "scroll",
